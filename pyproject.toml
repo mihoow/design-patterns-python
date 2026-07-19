@@ -1,0 +1,15 @@
+[tool.ruff]
+line-length = 79
+indent-width = 4
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "N",
+    "D",
+    "W",
+]
+
+[tool.ruff.format]
+indent-style = "space"
