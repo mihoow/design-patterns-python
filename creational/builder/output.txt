@@ -1,0 +1,41 @@
+Welcome to the sandwich shop!
+
+Choose bread:
+1. White bread
+2. Whole wheat bread
+3. Rye bread
+Choice: 2
+
+Choose meat:
+1. Chicken
+2. Ham
+3. Beef
+4. No meat
+Choice: 3
+
+Choose extras:
+Add Cheese? [y/N]: y
+Add Tomato? [y/N]: n
+Add Lettuce? [y/N]: n
+Add Pickles? [y/N]: y
+Heat the sandwich? [y/n]: y
+
+KITCHEN TICKET
+--------------------------------
+Bread: Whole wheat bread
+Meat: Beef
+Add: Cheese
+Add: Pickles
+Heat the sandwich
+
+Preparing sandwich.... done!
+
+CUSTOMER RECEIPT
+--------------------------------
+Whole wheat bread        4.50 PLN
+Beef                     6.50 PLN
+Cheese                   1.50 PLN
+Pickles                  1.00 PLN
+Heating                  0.50 PLN
+--------------------------------
+Total                   14.00 PLN

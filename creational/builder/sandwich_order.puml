@@ -1,0 +1,40 @@
+@startuml sandwich_order
+
+hide empty members
+
+class SandwichRecipe
+
+class OrderProcessor {
+    +OrderProcessor(builder)
+    +build_document(recipe)
+}
+
+abstract class OrderDocumentBuilder {
+    +reset()
+    +add_bread(bread)
+    +add_meat(meat)
+    +add_extra(extra)
+    +set_heating(heated)
+}
+
+class KitchenTicketBuilder {
+    +get_ticket()
+}
+
+class CustomerReceiptBuilder {
+    +get_receipt()
+}
+
+class KitchenTicket
+class CustomerReceipt
+
+KitchenTicketBuilder --|> OrderDocumentBuilder
+CustomerReceiptBuilder --|> OrderDocumentBuilder
+
+OrderProcessor ..> SandwichRecipe : reads
+OrderProcessor o--> OrderDocumentBuilder : builder
+
+KitchenTicketBuilder ..> KitchenTicket : creates
+CustomerReceiptBuilder ..> CustomerReceipt : creates
+
+@enduml

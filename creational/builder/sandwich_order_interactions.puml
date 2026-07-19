@@ -1,0 +1,83 @@
+@startuml seq
+
+
+participant client
+participant order_processor
+participant ticket_builder
+participant receipt_builder
+
+activate client
+
+client --> ticket_builder: KitchenTicketBuilder()
+activate ticket_builder
+deactivate ticket_builder
+
+client --> order_processor: OrderProcessor(ticket_builder)
+activate order_processor
+deactivate order_processor
+
+client -> order_processor: build_document(recipe)
+activate order_processor
+
+order_processor -> ticket_builder: add_bread(recipe.bread)
+activate ticket_builder
+deactivate ticket_builder
+
+order_processor -> ticket_builder: add_meat(recipe.meat)
+activate ticket_builder
+deactivate ticket_builder
+
+order_processor -> ticket_builder: add_extras(recipe.extras)
+activate ticket_builder
+deactivate ticket_builder
+
+order_processor -> ticket_builder: set_heating(recipe.heated)
+activate ticket_builder
+deactivate ticket_builder
+
+deactivate order_processor
+
+client -> ticket_builder: get_ticket()
+activate ticket_builder
+deactivate ticket_builder
+
+
+
+client --> receipt_builder: CustomerReceiptBuilder(PRICE_LIST)
+activate receipt_builder
+deactivate receipt_builder
+
+client --> order_processor: OrderProcessor(receipt_builder)
+activate order_processor
+deactivate order_processor
+
+client -> order_processor: build_document(recipe)
+activate order_processor
+
+order_processor -> receipt_builder: add_bread(recipe.bread)
+activate receipt_builder
+deactivate receipt_builder
+
+order_processor -> receipt_builder: add_meat(recipe.meat)
+activate receipt_builder
+deactivate receipt_builder
+
+order_processor -> receipt_builder: add_extras(recipe.extras)
+activate receipt_builder
+deactivate receipt_builder
+
+order_processor -> receipt_builder: set_heating(recipe.heated)
+activate receipt_builder
+deactivate receipt_builder
+
+deactivate order_processor
+
+
+client -> receipt_builder: get_receipt()
+activate receipt_builder
+deactivate receipt_builder
+
+
+deactivate client
+
+@enduml
