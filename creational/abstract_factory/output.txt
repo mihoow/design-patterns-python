@@ -1,0 +1,99 @@
+JSON
+----
+{
+  "title": "Design Patterns: Elements of Reusable Object-Oriented Software",
+  "authors": [
+    {
+      "name": "Erich Gamma"
+    },
+    {
+      "name": "Richard Helm"
+    },
+    {
+      "name": "Ralph Johnson"
+    },
+    {
+      "name": "John Vlissides"
+    }
+  ],
+  "topics": [
+    "creational patterns",
+    "structural patterns",
+    "behavioral patterns"
+  ],
+  "publication": {
+    "publisher": "Addison-Wesley",
+    "year": "1994",
+    "identifiers": {
+      "isbn_10": "0-201-63361-2",
+      "isbn_13": "978-0-201-63361-0"
+    }
+  },
+  "editions": [
+    {
+      "format": "hardcover",
+      "language": "English"
+    },
+    {
+      "format": "ebook",
+      "language": "English"
+    }
+  ]
+}
+
+YAML
+----
+title: "Design Patterns: Elements of Reusable Object-Oriented Software"
+authors:
+  - name: "Erich Gamma"
+  - name: "Richard Helm"
+  - name: "Ralph Johnson"
+  - name: "John Vlissides"
+topics:
+  - "creational patterns"
+  - "structural patterns"
+  - "behavioral patterns"
+publication:
+  publisher: "Addison-Wesley"
+  year: "1994"
+  identifiers:
+    isbn_10: "0-201-63361-2"
+    isbn_13: "978-0-201-63361-0"
+editions:
+  - format: "hardcover"
+    language: "English"
+  - format: "ebook"
+    language: "English"
+
+TOML
+----
+title = "Design Patterns: Elements of Reusable Object-Oriented Software"
+topics = ["creational patterns", "structural patterns", "behavioral patterns"]
+
+[[authors]]
+name = "Erich Gamma"
+
+[[authors]]
+name = "Richard Helm"
+
+[[authors]]
+name = "Ralph Johnson"
+
+[[authors]]
+name = "John Vlissides"
+
+[publication]
+publisher = "Addison-Wesley"
+year = "1994"
+
+[publication.identifiers]
+isbn_10 = "0-201-63361-2"
+isbn_13 = "978-0-201-63361-0"
+
+[[editions]]
+format = "hardcover"
+language = "English"
+
+[[editions]]
+format = "ebook"
+language = "English"

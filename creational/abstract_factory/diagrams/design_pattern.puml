@@ -1,0 +1,45 @@
+@startuml builder
+
+hide empty members
+
+class AbstractFactory {
+    +CreateProductA()
+    +CreateProductB()
+}
+
+class ConcreteFactory1 {
+    +CreateProductA()
+    +CreateProductB()
+}
+
+class ConcreteFactory2 {
+    +CreateProductA()
+    +CreateProductB()
+}
+
+class AbstractProductA
+class ProductA1
+class ProductA2
+
+class AbstractProductB
+class ProductB1
+class ProductB2
+
+
+ConcreteFactory1 --|> AbstractFactory
+ConcreteFactory2 --|> AbstractFactory
+
+ProductA1 --|> AbstractProductA
+ProductA2 --|> AbstractProductA
+
+ProductB1 --|> AbstractProductB
+ProductB2 --|> AbstractProductB
+
+ConcreteFactory1 ..> ProductA1
+ConcreteFactory1 ..> ProductB1
+
+ConcreteFactory2 ..> ProductA2
+ConcreteFactory2 ..> ProductB2
+
+
+@enduml

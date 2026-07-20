@@ -1,0 +1,18 @@
+@startuml builder
+
+hide empty members
+
+class AbstractFactory {
+    +CreateProductA()
+    +CreateProductB()
+}
+
+class AbstractProductA
+class AbstractProductB
+class Client
+
+Client --> AbstractFactory
+Client --> AbstractProductA
+Client --> AbstractProductB
+
+@enduml

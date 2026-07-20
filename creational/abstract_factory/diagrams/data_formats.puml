@@ -1,0 +1,66 @@
+@startuml builder
+
+hide empty members
+
+abstract class DataFormat {
+    {abstract} +create_root()
+    {abstract} +create_key_value()
+    {abstract} +create_dict()
+    {abstract} +create_list()
+}
+
+class JSONDataFormat {
+    +create_root()
+    +create_key_value()
+    +create_dict()
+    +create_list()
+}
+
+class YAMLDataFormat
+class TOMLDataFormat
+
+abstract class RootNode {
+    {abstract} +serialize(context)
+}
+class JSONRootNode {
+    +serialize(context)
+}
+
+abstract class KeyValueNode {
+    {abstract} +serialize(context)
+}
+class JSONKeyValueNode {
+    +serialize(context)
+}
+
+abstract class DictNode {
+    {abstract} +serialize(context)
+}
+class JSONDictNode {
+    +serialize(context)
+}
+
+abstract class ListNode {
+    {abstract} +serialize(context)
+}
+class JSONListNode {
+    +serialize(context)
+}
+
+JSONDataFormat --|> DataFormat
+YAMLDataFormat --|> DataFormat
+TOMLDataFormat --|> DataFormat
+
+JSONRootNode --|> RootNode
+RootNode --|> DictNode
+
+JSONKeyValueNode --|> KeyValueNode
+JSONDictNode --|> DictNode
+JSONListNode --|> ListNode
+
+JSONDataFormat ..> JSONRootNode
+JSONDataFormat ..> JSONKeyValueNode
+JSONDataFormat ..> JSONDictNode
+JSONDataFormat ..> JSONListNode
+
+@enduml
