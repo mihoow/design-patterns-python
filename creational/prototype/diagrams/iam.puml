@@ -1,0 +1,36 @@
+@startuml builder
+
+hide empty members
+
+class IAMAdministrator {
+    +Operation()
+}
+note bottom: r = role->clone()
+
+abstract class Role {
+    +set_mfa_required()
+    +limit_session()
+    +restrict_ro_region()
+    +clone()
+}
+
+class ApplicationRole {
+    +grant_entitlement()
+    +revoke_entitlement()
+    +clone()
+}
+
+class InfrastructureRole {
+    +allow_actions()
+    +deny_actions()
+    +clone()
+}
+
+IAMAdministrator --> Role: prototype
+
+ApplicationRole --|> Role
+InfrastructureRole --|> Role
+
+
+
+@enduml

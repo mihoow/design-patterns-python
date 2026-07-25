@@ -1,0 +1,31 @@
+@startuml builder
+
+hide empty members
+
+class Client {
+    +Operation()
+}
+note bottom: p = prototype->Clone()
+
+abstract class Prototype {
+    +Clone()
+}
+
+class ConcretePrototype1 {
+    +Clone()
+}
+note top: return copy of yourself
+
+class ConcretePrototype2 {
+    +Clone()
+}
+note top: return copy of yourself
+
+Client --> Prototype: prototype
+
+ConcretePrototype1 --|> Prototype
+ConcretePrototype2 --|> Prototype
+
+
+
+@enduml
