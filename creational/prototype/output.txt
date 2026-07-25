@@ -1,0 +1,66 @@
+Available role prototypes:
+1. Payroll Specialist
+2. Cloud Support Operator
+Choose a role: 2
+
+Role retrieved from the IAM repository:
+{
+  "max_session_minutes": null,
+  "name": "Cloud Support Operator",
+  "region": null,
+  "requires_mfa": false,
+  "resource_actions": {
+    "monitoring/*": [
+      "acknowledge-alert",
+      "read"
+    ],
+    "production/eu/*": [
+      "read",
+      "restart"
+    ]
+  },
+  "role_type": "InfrastructureRole"
+}
+
+
+Enter regions separated by commas (for example: Poland, Germany): Kraków, Alabama
+
+Created regional roles:
+
+{
+  "max_session_minutes": 60,
+  "name": "Kraków Cloud Support Operator",
+  "region": "Kraków",
+  "requires_mfa": true,
+  "resource_actions": {
+    "monitoring/*": [
+      "acknowledge-alert",
+      "read"
+    ],
+    "production/eu/*": [
+      "read",
+      "restart"
+    ]
+  },
+  "role_type": "InfrastructureRole"
+}
+
+{
+  "max_session_minutes": 60,
+  "name": "Alabama Cloud Support Operator",
+  "region": "Alabama",
+  "requires_mfa": true,
+  "resource_actions": {
+    "monitoring/*": [
+      "acknowledge-alert",
+      "read"
+    ],
+    "production/eu/*": [
+      "read",
+      "restart"
+    ]
+  },
+  "role_type": "InfrastructureRole"
+}
+
+Company policy: every new regional role requires MFA and has a 60-minute session limit.

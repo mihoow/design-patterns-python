@@ -1,0 +1,47 @@
+@startuml iam_interactions
+
+participant client
+participant repository
+participant iam_administrator
+participant role
+participant regional_role
+
+activate client
+
+client -> repository: retrieve(role_name)
+activate repository
+client <- repository: role
+deactivate repository
+
+client -> role: set_require_mfa(true)
+activate role
+deactivate role
+
+client -> role: set_max_session_minutes(60)
+activate role
+deactivate role
+
+client --> iam_administrator: IAMAdministrator(role)
+activate iam_administrator
+client <- iam_administrator: iam_administrator
+deactivate iam_administrator
+
+client -> iam_administrator: regionalize_role(region)
+activate iam_administrator
+
+iam_administrator -> role: clone()
+activate role
+iam_administrator <- role: regional_role
+deactivate role
+
+iam_administrator -> regional_role: set_region(region)
+activate regional_role
+deactivate regional_role
+
+client <- iam_administrator: regional_role
+
+deactivate iam_administrator
+
+deactivate client
+
+@enduml

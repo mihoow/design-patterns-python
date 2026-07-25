@@ -1,0 +1,38 @@
+{
+  "roles": [
+    {
+      "name": "Payroll Specialist",
+      "type": "application",
+      "region": null,
+      "requires_mfa": false,
+      "max_session_minutes": null,
+      "entitlements": {
+        "Payroll": [
+          "approve-payroll",
+          "edit-payroll",
+          "view-payroll"
+        ],
+        "Employee Directory": [
+          "view-employees"
+        ]
+      }
+    },
+    {
+      "name": "Cloud Support Operator",
+      "type": "infrastructure",
+      "region": null,
+      "requires_mfa": false,
+      "max_session_minutes": null,
+      "resource_actions": {
+        "production/eu/*": [
+          "read",
+          "restart"
+        ],
+        "monitoring/*": [
+          "acknowledge-alert",
+          "read"
+        ]
+      }
+    }
+  ]
+}

@@ -1,31 +1,35 @@
-@startuml builder
+@startuml iam
 
 hide empty members
 
 class IAMAdministrator {
-    +Operation()
+    +regionalize_role()
 }
 note bottom: r = role->clone()
 
+class RoleRepository {
+    +retrieve_names()
+    +retrieve()
+}
+
 abstract class Role {
-    +set_mfa_required()
-    +limit_session()
-    +restrict_ro_region()
+    +set_require_mfa()
+    +set_max_session_minutes()
+    +set_region()
     +clone()
 }
 
 class ApplicationRole {
-    +grant_entitlement()
-    +revoke_entitlement()
+    +set_entitlements()
     +clone()
 }
 
 class InfrastructureRole {
-    +allow_actions()
-    +deny_actions()
+    +set_resource_actions()
     +clone()
 }
 
+IAMAdministrator --> RoleRepository
 IAMAdministrator --> Role: prototype
 
 ApplicationRole --|> Role
