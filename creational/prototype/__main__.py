@@ -93,10 +93,9 @@ def main() -> None:
 
     regions = read_regions()
 
-    secured_prototype = base_role.clone()
-    secured_prototype.set_require_mfa(True).set_max_session_minutes(
-        SESSION_LIMIT_MINUTES
-    )
+    secured_prototype = base_role.set_require_mfa(
+        True
+    ).set_max_session_minutes(SESSION_LIMIT_MINUTES)
     administrator = IAMAdministrator(secured_prototype)
     regional_roles = administrator.regionalize_roles(regions)
 
