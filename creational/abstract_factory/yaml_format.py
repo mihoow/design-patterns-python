@@ -14,17 +14,6 @@ from .abstractions import (
 )
 
 
-class YAMLRootNode(RootNode):
-    """Represent the root of a YAML document."""
-
-    def serialize(
-        self,
-        context: SerializationContext | None = None,
-    ) -> str:
-        """Serialize the complete YAML document."""
-        return _serialize_dict(self.entries, _context(context))
-
-
 class YAMLKeyValueNode(KeyValueNode):
     """Represent a named YAML value."""
 
@@ -51,7 +40,16 @@ class YAMLDictNode(DictNode):
         context: SerializationContext | None = None,
     ) -> str:
         """Serialize a nested YAML mapping."""
-        return _serialize_dict(self.entries, _context(context))
+        current = _context(context)
+        if not self.entries:
+            return f"{' ' * current.indentation}{{}}"
+        return "\n".join(
+            entry.serialize(current) for entry in self.entries
+        )
+
+
+class YAMLRootNode(YAMLDictNode, RootNode):
+    """Represent the root of a YAML document."""
 
 
 class YAMLListNode(ListNode):
@@ -116,12 +114,3 @@ def _indented(context: SerializationContext) -> SerializationContext:
         indentation=context.indentation + 2,
         path=context.path,
     )
-
-
-def _serialize_dict(
-    entries: tuple[KeyValueNode, ...],
-    context: SerializationContext,
-) -> str:
-    if not entries:
-        return f"{' ' * context.indentation}{{}}"
-    return "\n".join(entry.serialize(context) for entry in entries)

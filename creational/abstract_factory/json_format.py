@@ -14,17 +14,6 @@ from .abstractions import (
 )
 
 
-class JSONRootNode(RootNode):
-    """Represent the root of a JSON document."""
-
-    def serialize(
-        self,
-        context: SerializationContext | None = None,
-    ) -> str:
-        """Serialize the complete JSON document."""
-        return _serialize_dict(self.entries, _context(context))
-
-
 class JSONKeyValueNode(KeyValueNode):
     """Represent a named JSON value."""
 
@@ -48,7 +37,20 @@ class JSONDictNode(DictNode):
         context: SerializationContext | None = None,
     ) -> str:
         """Serialize a nested JSON object."""
-        return _serialize_dict(self.entries, _context(context))
+        current = _context(context)
+        if not self.entries:
+            return "{}"
+
+        child_context = _indented(current)
+        values = [
+            entry.serialize(child_context) for entry in self.entries
+        ]
+        closing = " " * current.indentation
+        return "{\n" + ",\n".join(values) + f"\n{closing}}}"
+
+
+class JSONRootNode(JSONDictNode, RootNode):
+    """Represent the root of a JSON document."""
 
 
 class JSONListNode(ListNode):
@@ -120,16 +122,3 @@ def _serialize_value(
     if isinstance(value, str):
         return json.dumps(value, ensure_ascii=False)
     return value.serialize(context)
-
-
-def _serialize_dict(
-    entries: tuple[KeyValueNode, ...],
-    context: SerializationContext,
-) -> str:
-    if not entries:
-        return "{}"
-
-    child_context = _indented(context)
-    values = [entry.serialize(child_context) for entry in entries]
-    closing = " " * context.indentation
-    return "{\n" + ",\n".join(values) + f"\n{closing}}}"
