@@ -1,0 +1,33 @@
+@startuml decorator
+
+hide empty members
+
+abstract class Component {
+    +operation()
+}
+
+class ConcreteComponent {
+    +operation()
+}
+
+abstract class Decorator {
+    +operation()
+}
+
+class ConcreteDecoratorA {
+    added_state
+    +operation()
+}
+
+class ConcreteDecoratorB {
+    +operation()
+    +added_behavior()
+}
+
+ConcreteComponent --|> Component
+Decorator --|> Component
+Decorator o--> Component : component
+ConcreteDecoratorA --|> Decorator
+ConcreteDecoratorB --|> Decorator
+
+@enduml

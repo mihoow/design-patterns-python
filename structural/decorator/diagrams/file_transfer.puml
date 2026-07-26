@@ -1,0 +1,55 @@
+@startuml decorator
+
+hide empty members
+
+interface "Stream function" as StreamFunction {
+    +__call__(*args, **kwargs): Iterator[bytes]
+}
+
+class read_file_stream <<function>> {
+    +read_file_stream(file_path: Path): Iterator[bytes]
+}
+
+class compress <<function, decorator>> {
+    +compress(stream_func): StreamFunction
+}
+
+class log_progress <<function, decorator>> {
+    +log_progress(stream_func): StreamFunction
+}
+
+class encrypt <<function, decorator factory>> {
+    +encrypt(encryption: Encryption): decorator
+}
+
+class Encryption {
+    -_key: bytes
+    -_cipher: AESGCM
+    +key: bytes
+    +encrypt(chunk: bytes): bytes
+}
+
+read_file_stream ..|> StreamFunction
+
+compress ..> StreamFunction : decorates
+log_progress ..> StreamFunction : decorates
+encrypt ..> StreamFunction : decorates
+
+encrypt o--> Encryption : uses
+
+note top of compress
+Returns a wrapper function
+compatible with StreamFunction.
+end note
+
+note top of log_progress
+Returns a wrapper function
+compatible with StreamFunction.
+end note
+
+note top of encrypt
+Returns a decorator which
+returns a wrapper function.
+end note
+
+@enduml
