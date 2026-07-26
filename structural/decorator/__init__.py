@@ -1,0 +1,1 @@
+"""Demonstrate the Decorator pattern."""
